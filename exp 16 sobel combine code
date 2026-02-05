@@ -1,0 +1,17 @@
+import cv2
+import numpy as np
+img = cv2.imread("dog.jpg")
+if img is None:
+    print("Image not found")
+    exit()
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+sobelx = cv2.Sobel(gray, cv2.CV_64F, 1, 0, ksize=3)
+sobely = cv2.Sobel(gray, cv2.CV_64F, 0, 1, ksize=3)
+sobel_combined = cv2.magnitude(sobelx, sobely)
+sobel_combined = np.uint8(sobel_combined)
+cv2.imshow("Original Image", gray)
+cv2.imshow("Sobel X", np.uint8(np.absolute(sobelx)))
+cv2.imshow("Sobel Y", np.uint8(np.absolute(sobely)))
+cv2.imshow("Sobel Combined", sobel_combined)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
