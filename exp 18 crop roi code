@@ -1,0 +1,11 @@
+import cv2
+img = cv2.imread("bee.jpg")
+if img is None:
+    print("Image not found")
+    exit()
+roi = img[100:300, 200:400]
+img[10:210, 10:210] = roi
+cv2.imshow("Original Image", img)
+cv2.imshow("Cropped ROI", roi)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
