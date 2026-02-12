@@ -1,0 +1,21 @@
+import cv2
+cap = cv2.VideoCapture("girl_dance.mp4")
+frames = []
+while True:
+    ret, frame = cap.read()
+    if not ret:
+        break
+    frames.append(frame)
+cap.release()
+height, width, layers = frames[0].shape
+fps = 30  # You can also get fps from video
+out = cv2.VideoWriter(
+    "reversed_video.mp4",
+    cv2.VideoWriter_fourcc(*'mp4v'),
+    fps,
+    (width, height)
+)
+for frame in reversed(frames):
+    out.write(frame)
+out.release()
+print("Video reversed successfully!")
